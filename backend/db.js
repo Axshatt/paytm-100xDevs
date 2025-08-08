@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config();
 
-mongoose.connect("mongodb+srv://admin:1234567890@cluster0.rxlttmc.mongodb.net/paytm")
+mongoose.connect(process.env.MONGO_URL);
+
+
 
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.ObjectId;
@@ -35,9 +39,7 @@ const userSchema = new Schema({
     }
 })
 
-const userModal = mongoose.modal("User", userSchema);
+const userModal = mongoose.model("User", userSchema);
 
 
-module.exports = {
-    userModal
-}
+export default userModal;
