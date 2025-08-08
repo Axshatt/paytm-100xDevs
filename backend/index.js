@@ -1,11 +1,13 @@
 import express from "express";
+import { Router } from "express";
+import usersRoute from "./routes/index.js"
 
 
 const app = express();
 
-app.get("/user", (req, res) => {
-    res.send("Hello")
-})
+
+app.use('/api/v1', usersRoute)
+
 
 app.listen(3000, (Err) => {
     if (Err) {
