@@ -3,11 +3,14 @@ import express from "express";
 
 const app = express();
 
-app.get("/user",(req,res)=>{
+app.get("/user", (req, res) => {
     res.send("Hello")
 })
 
-app.listen(3000,(Err)=>{
-    console.log(Err);
-    
+app.listen(3000, (Err) => {
+    if (Err) {
+        console.log(Err);
+    }
+
+
 })
