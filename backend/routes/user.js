@@ -3,17 +3,18 @@ import jwt from "jsonwebtoken"
 import userModal from "../db";
 import JWT_SECRET from "../config"
 import zod from "zod";
+import authMiddleware from "../middleware/authMiddleware"
 
 const router = express.Router();
 
-const signupBody = zod.body({
+
+router.post("/user/signup", async (req,res)=>{
+    const signupBody = zod.body({
     username:zod.string().email(),
     firstName:zod.string(),
     lastName:zod.string(),
     password:zod.string()
 })
-router.post("/user/signup", async (req,res)=>{
-
     const {sucess} = signupBody.safeParse(req.body);
     if(!sucess){
         return res.status(411).json({
@@ -50,5 +51,11 @@ router.post("/user/signup", async (req,res)=>{
     }
 
 
+})
+
+router.put("/",authMiddleware,(req,res)=>{
+    const userBody=zod.body({
+        password:zod.string(),
+    })
 })
 export default router
